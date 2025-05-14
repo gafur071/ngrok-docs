@@ -1,20 +1,26 @@
----
-hide_table_of_contents: true
-displayed_sidebar: docs
----
+var proxy = require('express-http-proxy');
+var app = require('express')();
+//fix ssl localhost
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-import { InlineCode } from "@ngrok/mantle/inline-code";
-import ErrorDetails from "/src/components/ErrorDetails";
-import { EndpointUrlOrigin } from "/src/components/search-params-endpoint-url";
+app.use('/', proxy('https://localhost:5001'));
+app.listen(3000);
+# Create a new folder and enter it
+mkdir node-proxy-server
+cd node-proxy-server
 
-# ERR_NGROK_3200
+# Initialize a nodejs project
+npm init
 
-### Message
+# Install npm packages
+npm install --save express express-http-proxy
+# Press enter a bunch when it asks you to enter information. You shouldn't need to change anything.
 
-The endpoint <InlineCode><EndpointUrlOrigin fallback="HOSTNAME" /></InlineCode> is offline.
+# Create a javascript file and open it
+touch index.js
+open index.js
 
-<ErrorDetails error="err_ngrok_3200" />
+# Paste the code above from kenzouno1 into the file and save it
 
-### Further help
-
-If you're having trouble resolving this error, please reach out to [support@ngrok.com](mailto:support@ngrok.com?subject=Help%20with%20ERR_NGROK_3200)
+# Run the proxy server
+node index.js
